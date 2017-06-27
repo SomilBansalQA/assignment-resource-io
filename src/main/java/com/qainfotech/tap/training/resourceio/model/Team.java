@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 /**
  *
  * @author Ramandeep RamandeepSingh AT QAInfoTech.com
@@ -16,25 +14,17 @@ public class Team {
 	private final Integer id;
 	private final List<Individual> members;
 
+	/**
+	 * 
+	 * @param teamMap
+	 */
+
+	// Constructor
 	public Team(Map<String, Object> teamMap) {
 		// throw new UnsupportedOperationException("Not implemented.");
-		String name1 = null;
-		Integer id1 = null;
-		List<Individual> members1 = null;
-
-		for (Map.Entry<String, Object> entry : teamMap.entrySet()) {
-			if (entry.getKey() == "name")
-				name1 = entry.getValue().toString();
-			if (entry.getKey() == "id")
-				id1 = (Integer) entry.getValue();
-			if (entry.getKey() == "members")
-				members1 = (List<Individual>) entry.getValue();
-
-		}
-		name = name1;
-		id = id1;
-		members = members1;
-		//System.out.println(name+" "+id+" "+members);  
+		this.id = Integer.parseInt(teamMap.get("id").toString());
+		this.name = teamMap.get("name").toString();
+		this.members = (List<Individual>) teamMap.get("members");
 	}
 
 	/**
@@ -71,29 +61,21 @@ public class Team {
 	 * @return
 	 */
 	public List<Individual> getActiveMembers() {
-		//throw new UnsupportedOperationException("Not implemented.");
-	int c=0;
-		List<Individual> list1 = new ArrayList<Individual>();
-		 //	Iterator<Individual> itr = members.iterator();
-		for(int i =0 ; i<members.size();i++)
-		{
-	Individual ind = 	members.get(i);
-		if(ind.isActive()){
-			list1.add(ind);
-			c++;
+		// throw new UnsupportedOperationException("Not implemented.");
+
+		/**
+		 * variable activeMember has a list of individuals that are members of
+		 * this team and are also active
+		 */
+		List<Individual> activeMember = new ArrayList<Individual>();
+
+		for (int index = 0; index < members.size(); index++) {
+			Individual individual = members.get(index);
+			if (individual.isActive()) {
+				activeMember.add(individual);
+			}
 		}
-		
-		}
-		//System.out.println("dsadasd"+c+"snhngh");
-		/*while(itr.hasNext()){
-    		Individual individual=itr.next();
-    		if(individual.isActive()){
-    			list1.add(individual);
-    		}}
-*/
-		return list1;
-	
-	
+		return activeMember;
 	}
 
 	/**
@@ -102,18 +84,21 @@ public class Team {
 	 * @return
 	 */
 	public List<Individual> getInactiveMembers() {
-		//throw new UnsupportedOperationException("Not implemented.");
-		List<Individual> list1 = new ArrayList<Individual>();
+		// throw new UnsupportedOperationException("Not implemented.");
 
-		for(int i =0 ; i<members.size();i++)
-		{
-	Individual ind = 	members.get(i);
-		if(!(ind.isActive())){
-			list1.add(ind);
+		/**
+		 * variable inactiveMember has a list of individuals that are members of
+		 * this team and are also active
+		 */
+		List<Individual> inactiveMember = new ArrayList<Individual>();
+
+		for (int index = 0; index < members.size(); index++) {
+			Individual individual = members.get(index);
+			if (!(individual.isActive())) {
+				inactiveMember.add(individual);
+			}
 		}
-		}
-		return list1;
-	
-	
+		return inactiveMember;
+
 	}
 }
