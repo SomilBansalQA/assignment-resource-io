@@ -48,7 +48,6 @@ public class TeamsYamlReader {
 			Individual individual = new Individual(map);
 			individualList.add(individual);
 		}
-
 		return individualList;
 	}
 
@@ -68,6 +67,7 @@ public class TeamsYamlReader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		/**
 		 * idFlag is 1 if variable id data matched with any individual id data,
 		 * otherwise 0
@@ -99,7 +99,6 @@ public class TeamsYamlReader {
 	 * @throws com.qainfotech.tap.training.resourceio.exceptions.ObjectNotFoundException
 	 */
 	public Individual getIndividualByName(String name) throws ObjectNotFoundException {
-
 		try {
 			individualList = getListOfIndividuals();
 		} catch (FileNotFoundException e) {
@@ -110,9 +109,7 @@ public class TeamsYamlReader {
 		 * nameFlag is 1 if variable name data matched with any individual name
 		 * data, otherwise 0
 		 */
-
 		int nameFlag = 0;
-
 		Iterator<Individual> iterate = individualList.iterator();
 		Individual individual = null;
 		while (iterate.hasNext()) {
@@ -123,12 +120,11 @@ public class TeamsYamlReader {
 			}
 		}
 		if (nameFlag == 1) {
-
 			return individual;
-		} else {
+		} 
+		else {
 			throw new ObjectNotFoundException("Individual", "Name", name);
 		}
-
 	}
 
 	/**
@@ -149,11 +145,9 @@ public class TeamsYamlReader {
 		 * inactive members of Individual
 		 */
 		List<Individual> inactiveMembers = new ArrayList<>();
-
 		Iterator<Individual> iterate = individualList.iterator();
 
 		Individual individual = null;
-
 		while (iterate.hasNext()) {
 			individual = iterate.next();
 			if (!(individual.isActive())) {
@@ -228,16 +222,11 @@ public class TeamsYamlReader {
 					e.printStackTrace();
 				}
 			}
-
 			map1.put("members", list);
-
 			Team team = new Team(map1);
 			teamList.add(team);
 
 		}
 		return teamList;
 	}
-
-	
-
 }
